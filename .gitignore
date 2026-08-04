@@ -1,0 +1,34 @@
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs and Runtime
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Browser / Live Server caches
+.history/
+.cache/
+
+# Design files (Optional: Remove if you want to track them, but highly recommended to ignore heavy raw backups)
+*.psd
+*.ai
+
+# Futureproofing (for when you add PHP/Node modules later)
+node_modules/
+vendor/
+.env
+config.local.php

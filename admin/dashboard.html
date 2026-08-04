@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentHub — Admin Dashboard</title>
+</head>
+<body>
+
+  <header>
+    <a href="../index.html"><img src="../images/logo.png" alt="StudentHub logo"></a>
+    <h1>Admin Dashboard</h1>
+  </header>
+
+  <div class="dashboard-layout">
+    <nav aria-label="Admin navigation">
+      <ul>
+        <li><a href="#students">Manage Students</a></li>
+        <li><a href="#events">Manage Events</a></li>
+        <li><a href="#resources">Manage Resources</a></li>
+        <li><a href="../login.html">Logout</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section aria-labelledby="stats-heading">
+        <h2 id="stats-heading" class="visually-hidden">Overview stats</h2>
+        <article>
+          <h3>Total students</h3>
+          <p>0</p>
+        </article>
+        <article>
+          <h3>Total events</h3>
+          <p>0</p>
+        </article>
+        <article>
+          <h3>Pending requests</h3>
+          <p>0</p>
+        </article>
+      </section>
+
+      <section id="students" aria-labelledby="students-heading">
+        <h2 id="students-heading">Student Records</h2>
+        <table>
+          <caption class="visually-hidden">List of registered students</caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Student name</td>
+              <td>student@example.com</td>
+              <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 StudentHub. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

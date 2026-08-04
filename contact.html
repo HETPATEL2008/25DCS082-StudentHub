@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentHub — Contact</title>
+</head>
+<body>
+
+  <header>
+    <a href="index.html"><img src="images/logo.png" alt="StudentHub logo"></a>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Contact Us</h1>
+
+    <section aria-labelledby="contact-form-heading">
+      <h2 id="contact-form-heading">Send us a message</h2>
+      <form action="#" method="post">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" cols = "45" required></textarea>
+        </div>
+
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <aside aria-labelledby="contact-info-heading">
+      <h2 id="contact-info-heading">Contact Information</h2>
+      <address>
+        College address here.<br>
+        Phone: <a href="tel:+91 900000000">+91 90000 00000</a><br>
+        Email: <a href="mailto:info@studenthub.example">info@studenthub.example</a>
+      </address>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 StudentHub. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

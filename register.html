@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentHub — Register</title>
+</head>
+<body>
+
+  <header>
+    <a href="index.html"><img src="images/logo.png" alt="StudentHub logo"></a>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Create your account</h1>
+
+    <section aria-labelledby="register-form-heading">
+      <h2 id="register-form-heading" class="visually-hidden">Registration form</h2>
+      <form action="#" method="post">
+
+        <div>
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+          <label for="idno">ID Number</label>
+          <input type="text" id="idno" name="idno" required>
+        </div>
+
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required minlength="8">
+        </div>
+
+        <div>
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" required minlength="8">
+        </div>
+
+        <div>
+          <label for="course">Course</label>
+          <select id="course" name="course" required>
+            <option value="">Select course</option>
+            <option value="cse">B.Tech CSE</option>
+            <option value="ce">B.Tech CE</option>
+            <option value="it">B.Tech IT</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="year">Year</label>
+          <select id="year" name="year" required>
+            <option value="">Select year</option>
+            <option value="1">1st</option>
+            <option value="2">2nd</option>
+            <option value="3">3rd</option>
+            <option value="4">4th</option>
+          </select>
+        </div>
+
+        <fieldset>
+          <legend>Gender</legend>
+          <input type="radio" id="gender-male" name="gender" value="male">
+          <label for="gender-male">Male</label>
+          <input type="radio" id="gender-female" name="gender" value="female">
+          <label for="gender-female">Female</label>
+          <input type="radio" id="gender-other" name="gender" value="other">
+          <label for="gender-other">Other</label>
+        </fieldset>
+
+        <div>
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">I accept the terms and conditions</label>
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+
+      <p><a href="login.html">Already have an account? Login</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 StudentHub. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
