@@ -9,8 +9,27 @@
 <body>
 
   <header>
-    <a href="../index.html"><img src="../logo.png" alt="StudentHub logo"></a>
-    <h1>Admin Dashboard</h1>
+    <a href="../index.html" class="header-brand">
+      <div class="logo">SH</div>
+      <span class="logo-text">StudentHub Admin</span>
+    </a>
+
+    <button class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../courses.html">Courses</a></li>
+        <li><a href="../events.html">Events</a></li>
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="../login.html">Logout</a></li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle dark mode">
+          🌙<span class="theme-text">Dark</span>
+          </button>
+        </li>
+        </ul>
+    </nav>
   </header>
 
   <div class="dashboard-layout">
@@ -67,5 +86,6 @@
     <p>&copy; 2026 StudentHub. All rights reserved.</p>
   </footer>
 
+  <script src="../js/main.js"></script>
 </body>
 </html>
