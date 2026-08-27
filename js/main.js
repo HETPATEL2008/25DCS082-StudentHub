@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFaqAccordion();
     initModal();
     initContentSlider();
+    initRegisterValidation();
 });
 
 function initThemeSwitcher() {
@@ -174,6 +175,198 @@ function initContentSlider() {
                 currentIndex = (currentIndex - 1 + slides.length) % slides.length;
                 showSlide(currentIndex);
             });
+        }
+    });
+}
+
+/* ==========================================================
+   Practical 5 — Registration form validation
+   Regex validation, live errors near each field, password
+   strength meter. Runs only when #register-form exists.
+   ========================================================== */
+function initRegisterValidation() {
+    const registerForm = document.getElementById('register-form');
+    if (!registerForm) return;
+
+    const fields = {
+        fullname: {
+            input: document.getElementById('fullname'),
+            error: document.getElementById('err-fullname'),
+            pattern: /^[A-Za-z ]{3,50}$/,
+            message: 'Enter a name with 3–50 letters (spaces allowed, no numbers or symbols).'
+        },
+        email: {
+            input: document.getElementById('email'),
+            error: document.getElementById('err-email'),
+            pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+            message: 'Enter a valid email address, e.g. name@example.com.'
+        },
+        mobile: {
+            input: document.getElementById('mobile'),
+            error: document.getElementById('err-mobile'),
+            pattern: /^[6-9]\d{9}$/,
+            message: 'Enter a valid 10-digit mobile number (starts with 6–9).'
+        },
+        idno: {
+            input: document.getElementById('idno'),
+            error: document.getElementById('err-idno'),
+            pattern: /^[A-Za-z0-9]{4,15}$/,
+            message: 'ID number must be 4–15 letters/numbers only.'
+        },
+        password: {
+            input: document.getElementById('password'),
+            error: document.getElementById('err-password'),
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
+            message: 'Password needs 8+ characters, an uppercase letter, a lowercase letter, a number, and a symbol.'
+        }
+    };
+
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const confirmPasswordError = document.getElementById('err-confirm-password');
+    const courseSelect = document.getElementById('course');
+    const courseError = document.getElementById('err-course');
+    const yearSelect = document.getElementById('year');
+    const yearError = document.getElementById('err-year');
+    const genderInputs = document.querySelectorAll('input[name="gender"]');
+    const genderError = document.getElementById('err-gender');
+    const termsInput = document.getElementById('terms');
+    const termsError = document.getElementById('err-terms');
+    const formSuccess = document.getElementById('form-success');
+
+    const pwStrengthBar = document.getElementById('pw-strength-bar');
+    const pwStrengthText = document.getElementById('pw-strength-text');
+
+    function setFieldState(input, errorEl, isValid, message) {
+        if (isValid) {
+            input.classList.remove('input-invalid');
+            input.setAttribute('aria-invalid', 'false');
+            if (errorEl) errorEl.textContent = '';
+        } else {
+            input.classList.add('input-invalid');
+            input.setAttribute('aria-invalid', 'true');
+            if (errorEl) errorEl.textContent = message;
+        }
+    }
+
+    function validateField(key) {
+        const field = fields[key];
+        const value = field.input.value.trim();
+        const isValid = field.pattern.test(value);
+        setFieldState(field.input, field.error, isValid, field.message);
+        return isValid;
+    }
+
+    function validateConfirmPassword() {
+        const isValid =
+            confirmPasswordInput.value.length > 0 &&
+            confirmPasswordInput.value === fields.password.input.value;
+        setFieldState(confirmPasswordInput, confirmPasswordError, isValid, 'Passwords do not match.');
+        return isValid;
+    }
+
+    function validateSelect(select, errorEl, message) {
+        const isValid = select.value !== '';
+        setFieldState(select, errorEl, isValid, message);
+        return isValid;
+    }
+
+    function validateGender() {
+        const isValid = Array.from(genderInputs).some((r) => r.checked);
+        genderError.textContent = isValid ? '' : 'Please select a gender.';
+        return isValid;
+    }
+
+    function validateTerms() {
+        const isValid = termsInput.checked;
+        termsError.textContent = isValid ? '' : 'You must accept the terms and conditions.';
+        return isValid;
+    }
+
+    function getPasswordStrength(value) {
+        let score = 0;
+        if (value.length >= 8) score++;
+        if (/[a-z]/.test(value)) score++;
+        if (/[A-Z]/.test(value)) score++;
+        if (/\d/.test(value)) score++;
+        if (/[^A-Za-z0-9]/.test(value)) score++;
+        return score;
+    }
+
+    function updateStrengthMeter() {
+        const value = fields.password.input.value;
+        const score = getPasswordStrength(value);
+
+        let label = '';
+        let widthPercent = 0;
+        let color = '#d1d5db';
+
+        if (value.length === 0) {
+            label = '';
+            widthPercent = 0;
+        } else if (score <= 2) {
+            label = 'Weak';
+            widthPercent = 33;
+            color = '#dc2626';
+        } else if (score <= 4) {
+            label = 'Medium';
+            widthPercent = 66;
+            color = '#d97706';
+        } else {
+            label = 'Strong';
+            widthPercent = 100;
+            color = '#16a34a';
+        }
+
+        pwStrengthBar.style.width = widthPercent + '%';
+        pwStrengthBar.style.background = color;
+        pwStrengthText.textContent = label;
+        pwStrengthText.style.color = color;
+    }
+
+    Object.keys(fields).forEach((key) => {
+        const field = fields[key];
+        field.input.addEventListener('input', () => {
+            validateField(key);
+            if (key === 'password') {
+                updateStrengthMeter();
+                if (confirmPasswordInput.value) validateConfirmPassword();
+            }
+        });
+        field.input.addEventListener('blur', () => validateField(key));
+    });
+
+    confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+    confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+
+    courseSelect.addEventListener('change', () =>
+        validateSelect(courseSelect, courseError, 'Please select a course.'));
+    yearSelect.addEventListener('change', () =>
+        validateSelect(yearSelect, yearError, 'Please select a year.'));
+    genderInputs.forEach((radio) => radio.addEventListener('change', validateGender));
+    termsInput.addEventListener('change', validateTerms);
+
+    registerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        formSuccess.textContent = '';
+        formSuccess.className = '';
+
+        const results = Object.keys(fields).map(validateField);
+        results.push(validateConfirmPassword());
+        results.push(validateSelect(courseSelect, courseError, 'Please select a course.'));
+        results.push(validateSelect(yearSelect, yearError, 'Please select a year.'));
+        results.push(validateGender());
+        results.push(validateTerms());
+
+        const allValid = results.every(Boolean);
+
+        if (allValid) {
+            formSuccess.textContent = 'All fields look good — form is ready to submit to the server.';
+            formSuccess.classList.add('form-success-ok');
+        } else {
+            formSuccess.textContent = 'Please fix the highlighted fields above.';
+            formSuccess.classList.add('form-success-error');
+            const firstInvalid = registerForm.querySelector('.input-invalid, input:invalid');
+            if (firstInvalid) firstInvalid.focus();
         }
     });
 }

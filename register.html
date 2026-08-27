@@ -39,55 +39,72 @@
 
     <section aria-labelledby="register-form-heading">
       <h2 id="register-form-heading" class="visually-hidden">Registration form</h2>
-      <form action="#" method="post">
+      <form id="register-form" action="#" method="post" novalidate>
 
         <div>
           <label for="fullname">Full Name</label>
-          <input type="text" id="fullname" name="fullname" required>
+          <input type="text" id="fullname" name="fullname" required aria-describedby="err-fullname">
+          <span class="error-message" id="err-fullname"></span>
         </div>
 
         <div>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email" required aria-describedby="err-email">
+          <span class="error-message" id="err-email"></span>
+        </div>
+
+        <div>
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" id="mobile" name="mobile" required aria-describedby="err-mobile" placeholder="10-digit number">
+          <span class="error-message" id="err-mobile"></span>
         </div>
 
         <div>
           <label for="idno">ID Number</label>
-          <input type="text" id="idno" name="idno" required>
+          <input type="text" id="idno" name="idno" required aria-describedby="err-idno">
+          <span class="error-message" id="err-idno"></span>
         </div>
 
         <div>
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" required minlength="8">
+          <input type="password" id="password" name="password" required minlength="8" aria-describedby="err-password pw-strength-text">
+          <div class="password-strength">
+            <div class="password-strength-bar" id="pw-strength-bar"></div>
+          </div>
+          <span class="strength-text" id="pw-strength-text"></span>
+          <span class="error-message" id="err-password"></span>
         </div>
 
         <div>
           <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" name="confirm-password" required minlength="8">
+          <input type="password" id="confirm-password" name="confirm-password" required minlength="8" aria-describedby="err-confirm-password">
+          <span class="error-message" id="err-confirm-password"></span>
         </div>
 
         <div>
           <label for="course">Course</label>
-          <select id="course" name="course" required>
+          <select id="course" name="course" required aria-describedby="err-course">
             <option value="">Select course</option>
             <option value="cse">B.Tech CSE</option>
             <option value="ce">B.Tech CE</option>
             <option value="it">B.Tech IT</option>
           </select>
+          <span class="error-message" id="err-course"></span>
         </div>
 
         <div>
           <label for="year">Year</label>
-          <select id="year" name="year" required>
+          <select id="year" name="year" required aria-describedby="err-year">
             <option value="">Select year</option>
             <option value="1">1st</option>
             <option value="2">2nd</option>
             <option value="3">3rd</option>
             <option value="4">4th</option>
           </select>
+          <span class="error-message" id="err-year"></span>
         </div>
 
-        <fieldset>
+        <fieldset aria-describedby="err-gender">
           <legend>Gender</legend>
           <input type="radio" id="gender-male" name="gender" value="male">
           <label for="gender-male">Male</label>
@@ -95,12 +112,16 @@
           <label for="gender-female">Female</label>
           <input type="radio" id="gender-other" name="gender" value="other">
           <label for="gender-other">Other</label>
+          <span class="error-message" id="err-gender"></span>
         </fieldset>
 
         <div>
-          <input type="checkbox" id="terms" name="terms" required>
+          <input type="checkbox" id="terms" name="terms" required aria-describedby="err-terms">
           <label for="terms">I accept the terms and conditions</label>
+          <span class="error-message" id="err-terms"></span>
         </div>
+
+        <p id="form-success" role="status"></p>
 
         <button type="submit">Register</button>
       </form>
