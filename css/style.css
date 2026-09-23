@@ -989,3 +989,194 @@ footer nav ul {
   color: var(--danger-color);
   font-weight: 600;
 }
+
+.data-controls-section {
+  margin-bottom: 1.5rem;
+}
+
+.data-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: end;
+}
+
+.data-controls > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0;
+}
+
+.data-controls label {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.data-controls input,
+.data-controls select {
+  width: 100%;
+}
+
+.data-controls button {
+  width: auto;
+  align-self: flex-start;
+}
+
+.fetch-status {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.fetch-error {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.data-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 16px var(--shadow-color);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.data-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--card-border-hover);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+}
+
+.data-card h3 {
+  color: var(--text-color);
+  margin: 0.75rem 0 0.5rem;
+}
+
+.data-card p {
+  color: var(--text-muted);
+}
+
+.data-card time {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: color-mix(
+    in srgb,
+    var(--primary-color) 15%,
+    transparent
+  );
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.badge-technical {
+  background: color-mix(
+    in srgb,
+    var(--primary-color) 15%,
+    transparent
+  );
+  color: var(--primary-color);
+}
+
+.badge-cultural {
+  background: color-mix(
+    in srgb,
+    var(--secondary-color) 15%,
+    transparent
+  );
+  color: var(--secondary-color);
+}
+
+.badge-sports {
+  background: color-mix(
+    in srgb,
+    var(--success-color) 15%,
+    transparent
+  );
+  color: var(--success-color);
+}
+
+.badge-workshop {
+  background: color-mix(
+    in srgb,
+    var(--accent-color) 15%,
+    transparent
+  );
+  color: var(--accent-color);
+}
+
+.badge-seminar {
+  background: color-mix(
+    in srgb,
+    var(--danger-color) 15%,
+    transparent
+  );
+  color: var(--danger-color);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.pagination-btn {
+  min-width: 40px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.pagination-btn.active {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (min-width: 600px) {
+  .data-controls {
+    grid-template-columns:
+      2fr
+      1fr
+      1fr
+      auto;
+  }
+
+  .data-controls button {
+    align-self: end;
+  }
+}

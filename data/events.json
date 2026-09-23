@@ -1,0 +1,17 @@
+[
+  { "id": 1, "title": "Tech Fest 2026", "date": "2026-09-05", "category": "technical", "description": "Annual technical festival with hackathons, coding contests, and project exhibitions." },
+  { "id": 2, "title": "Freshers' Welcome Party", "date": "2026-08-20", "category": "cultural", "description": "A fun evening of music, games, and introductions for new students." },
+  { "id": 3, "title": "Inter-College Cricket Cup", "date": "2026-09-12", "category": "sports", "description": "Annual cricket tournament between CSE, IT, and CE departments." },
+  { "id": 4, "title": "AI & Machine Learning Workshop", "date": "2026-09-18", "category": "workshop", "description": "Hands-on workshop covering the basics of Python, ML models, and real datasets." },
+  { "id": 5, "title": "Guest Lecture: Careers in Cloud Computing", "date": "2026-09-22", "category": "seminar", "description": "Industry expert talk on career paths in AWS, Azure, and GCP." },
+  { "id": 6, "title": "Code Sprint 24hr Hackathon", "date": "2026-10-03", "category": "technical", "description": "A 24-hour team hackathon to build and pitch a working prototype." },
+  { "id": 7, "title": "Annual Cultural Night", "date": "2026-10-10", "category": "cultural", "description": "Dance, music, and drama performances by students across all years." },
+  { "id": 8, "title": "Badminton Championship", "date": "2026-10-15", "category": "sports", "description": "Singles and doubles badminton matches open to all students." },
+  { "id": 9, "title": "Git & GitHub Workshop", "date": "2026-10-20", "category": "workshop", "description": "Learn version control basics, branching, and collaborative workflows." },
+  { "id": 10, "title": "Resume & Interview Prep Seminar", "date": "2026-10-25", "category": "seminar", "description": "Tips from alumni and placement cell on resumes and interview rounds." },
+  { "id": 11, "title": "Web Development Bootcamp", "date": "2026-11-02", "category": "workshop", "description": "Two-day intensive session on HTML, CSS, JavaScript, and deployment." },
+  { "id": 12, "title": "Robotics Expo", "date": "2026-11-08", "category": "technical", "description": "Showcase of student-built robots and automation projects." },
+  { "id": 13, "title": "Football Tournament", "date": "2026-11-14", "category": "sports", "description": "Knockout-format football tournament across all departments." },
+  { "id": 14, "title": "Diwali Celebration", "date": "2026-11-20", "category": "cultural", "description": "Campus-wide Diwali celebration with rangoli and lighting competitions." },
+  { "id": 15, "title": "Alumni Connect Meetup", "date": "2026-11-28", "category": "seminar", "description": "Networking session with graduated alumni working across the industry." }
+]

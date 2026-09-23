@@ -1,0 +1,17 @@
+[
+  { "id": 1, "name": "Computer Networks — Unit 1 Notes", "subjectCode": "cn", "subjectName": "Computer Network", "url": "#" },
+  { "id": 2, "name": "Computer Networks — OSI Model Slides", "subjectCode": "cn", "subjectName": "Computer Network", "url": "#" },
+  { "id": 3, "name": "DSA — Arrays & Linked Lists Notes", "subjectCode": "dsa", "subjectName": "Data Structures and Algorithms", "url": "#" },
+  { "id": 4, "name": "DSA — Sorting Algorithms Cheat Sheet", "subjectCode": "dsa", "subjectName": "Data Structures and Algorithms", "url": "#" },
+  { "id": 5, "name": "DSA — Trees and Graphs Practice Set", "subjectCode": "dsa", "subjectName": "Data Structures and Algorithms", "url": "#" },
+  { "id": 6, "name": "DBMS — ER Diagram Basics", "subjectCode": "dbms", "subjectName": "Database Management System", "url": "#" },
+  { "id": 7, "name": "DBMS — Normalization Notes", "subjectCode": "dbms", "subjectName": "Database Management System", "url": "#" },
+  { "id": 8, "name": "Machine Learning — Intro Slides", "subjectCode": "ml", "subjectName": "Machine Learning", "url": "#" },
+  { "id": 9, "name": "Machine Learning — Regression Models Notes", "subjectCode": "ml", "subjectName": "Machine Learning", "url": "#" },
+  { "id": 10, "name": "Java OOP — Classes and Objects Notes", "subjectCode": "java", "subjectName": "Object Oriented Programing with Java", "url": "#" },
+  { "id": 11, "name": "Java OOP — Inheritance & Polymorphism Guide", "subjectCode": "java", "subjectName": "Object Oriented Programing with Java", "url": "#" },
+  { "id": 12, "name": "Operating Systems — Process Scheduling Notes", "subjectCode": "os", "subjectName": "Operating System", "url": "#" },
+  { "id": 13, "name": "Operating Systems — Deadlocks Summary", "subjectCode": "os", "subjectName": "Operating System", "url": "#" },
+  { "id": 14, "name": "C++ — Pointers and Memory Notes", "subjectCode": "C++", "subjectName": "Programming with C++", "url": "#" },
+  { "id": 15, "name": "C++ — STL Quick Reference", "subjectCode": "C++", "subjectName": "Programming with C++", "url": "#" }
+]

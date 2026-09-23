@@ -1,83 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudentHub — Resources</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub — Resources</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
- <header>
-  <a href="index.html" class="header-brand">
-    <div class="logo">SH</div>
-    <span class="logo-text">StudentHub</span>
-  </a>
+    <header>
+        <a href="index.html" class="header-brand">
+            <div class="logo">SH</div>
+            <span class="logo-text">StudentHub</span>
+        </a>
 
-  <button class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+        <button class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li>
-        <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle dark mode">
-          🌙 <span class="theme-text">Dark</span>
-        </button>
-      </li>
-    </ul>
-  </nav>
-  </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle-btn" type="button"
+                            aria-label="Toggle dark mode">
+                        🌙 <span class="theme-text">Dark</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <h1>Study Resources</h1>
+    <main>
 
-    <section aria-labelledby="search-heading">
-      <h2 id="search-heading" class="visually-hidden">Search resources</h2>
-      <form role="search" action="#" method="get">
-        <label for="resource-search">Search resources</label>
-        <input type="search" id="resource-search" name="q">
+        <h1>Study Resources</h1>
 
-        <label for="subject-filter">Filter by subject</label>
-        <select id="subject-filter" name="subject">
-          <option value="">All subjects</option>
-          <option value="cn">Computer Network</option>
-          <option value="dsa">Data Structures and Algorithms</option>
-          <option value="dbms">Database Management System</option>
-          <option value="ml">Machine Learning</option>
-          <option value="java">Object Oriented Programing with Java</option>
-          <option value="os">Operating System</option>
-          <option value="C++">Programming with C++</option>
-        </select>
+        <!-- Practical 6: Search, Filter and Sort -->
+        <section class="data-controls-section"
+                 aria-labelledby="resource-controls-heading">
 
-        <button type="submit">Search</button>
-      </form>
-    </section>
+            <h2 id="resource-controls-heading" class="visually-hidden">
+                Resource search and filter controls
+            </h2>
 
-    <section aria-labelledby="resource-list-heading">
-      <h2 id="resource-list-heading" class="visually-hidden">Resource list</h2>
+            <form id="resources-controls"
+                  class="data-controls"
+                  role="search">
 
-      <article>
-        <h3>Resource name — Subject</h3>
-        <a href="#">Download</a>
-      </article>
+                <div>
+                    <label for="resource-search">Search resources</label>
+                    <input
+                        type="search"
+                        id="resource-search"
+                        name="q"
+                        placeholder="Search by resource name or subject"
+                    >
+                </div>
 
-      <article>
-        <h3>Resource name — Subject</h3>
-        <a href="#">Download</a>
-      </article>
-    </section>
-  </main>
+                <div>
+                    <label for="subject-filter">Filter by subject</label>
 
-  <footer>
-    <p>&copy; 2026 StudentHub. All rights reserved.</p>
-  </footer>
+                    <select id="subject-filter" name="subject">
 
-  <script src="js/main.js"></script>
+                        <option value="">All subjects</option>
+
+                        <option value="cn">
+                            Computer Network
+                        </option>
+
+                        <option value="dsa">
+                            Data Structures and Algorithms
+                        </option>
+
+                        <option value="dbms">
+                            Database Management System
+                        </option>
+
+                        <option value="ml">
+                            Machine Learning
+                        </option>
+
+                        <option value="java">
+                            Object Oriented Programing with Java
+                        </option>
+
+                        <option value="os">
+                            Operating System
+                        </option>
+
+                        <option value="C++">
+                            Programming with C++
+                        </option>
+
+                    </select>
+                </div>
+
+                <div>
+                    <label for="resource-sort">Sort resources</label>
+
+                    <select id="resource-sort">
+                        <option value="name-asc">Name: A-Z</option>
+                        <option value="name-desc">Name: Z-A</option>
+                        <option value="subject-asc">Subject: A-Z</option>
+                        <option value="subject-desc">Subject: Z-A</option>
+                    </select>
+                </div>
+
+                <button type="submit">Search</button>
+
+            </form>
+
+        </section>
+
+        <p id="resources-status" class="fetch-status">
+            Loading resources...
+        </p>
+
+        <section aria-labelledby="resource-list-heading">
+
+            <h2 id="resource-list-heading" class="visually-hidden">
+                Resource list
+            </h2>
+
+            <div id="resources-container" class="resource-list"></div>
+
+            <div id="resources-pagination"
+                 class="pagination"
+                 aria-label="Resources pagination"></div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 StudentHub. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

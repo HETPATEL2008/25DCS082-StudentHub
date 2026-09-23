@@ -1,0 +1,17 @@
+[
+  { "id": 1, "question": "What is StudentHub?", "answer": "StudentHub is a central web portal built for managing student resources, academic events, and course details." },
+  { "id": 2, "question": "How do I access course resources?", "answer": "Navigate to the Resources tab from the navigation header to download available study materials." },
+  { "id": 3, "question": "How do I register for an account?", "answer": "Click Register in the navigation bar and fill in your name, email, mobile number, ID number, and password." },
+  { "id": 4, "question": "I forgot my password. What should I do?", "answer": "Password reset support will be added in a future update. For now, contact the admin through the Contact page." },
+  { "id": 5, "question": "Can I switch between light and dark mode?", "answer": "Yes — use the Dark/Light toggle button in the navigation bar. Your preference is saved automatically for next time." },
+  { "id": 6, "question": "How do I find upcoming events?", "answer": "Visit the Events page to see a searchable, filterable list of all upcoming campus events." },
+  { "id": 7, "question": "Are the study resources free to download?", "answer": "Yes, all resources listed on the Resources page are free for registered students to download." },
+  { "id": 8, "question": "Who can access the Admin Dashboard?", "answer": "Only users with an admin role can access the Admin Dashboard, which is protected by role-based access control." },
+  { "id": 9, "question": "How do I contact support?", "answer": "Use the contact form on the Contact page, or email the address listed at the bottom of that page." },
+  { "id": 10, "question": "Is my registration data secure?", "answer": "Passwords are hashed before storage and never saved in plain text, following standard web security practices." },
+  { "id": 11, "question": "Can I filter resources by subject?", "answer": "Yes, use the subject dropdown on the Resources page to filter materials by course, such as DSA or DBMS." },
+  { "id": 12, "question": "Does StudentHub work on mobile devices?", "answer": "Yes, the layout is fully responsive and adapts to mobile, tablet, and desktop screen sizes." },
+  { "id": 13, "question": "How often is the Events list updated?", "answer": "The events list is loaded dynamically from JSON data and can be updated by the admin at any time." },
+  { "id": 14, "question": "Can faculty use StudentHub too?", "answer": "The current version is designed for students, with faculty and admin features planned for later phases." },
+  { "id": 15, "question": "What technologies power StudentHub?", "answer": "The frontend uses HTML5, CSS3, and JavaScript; later phases add PHP and MySQL for backend functionality." }
+]

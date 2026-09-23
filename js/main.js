@@ -6,6 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initModal();
     initContentSlider();
     initRegisterValidation();
+
+    if (document.getElementById('faq-container') || document.getElementById('faqs-container')) {
+        initFaqsPage();
+    }
+
+    if (document.getElementById('events-container')) {
+        initEventsPage();
+    }
+
+    if (document.getElementById('resources-container')) {
+        initResourcesPage();
+    }
 });
 
 function initThemeSwitcher() {
@@ -13,7 +25,7 @@ function initThemeSwitcher() {
     document.documentElement.setAttribute('data-theme', savedTheme);
 
     const themeToggleBtns = document.querySelectorAll('.theme-btn, .theme-toggle-btn, #theme-toggle');
-    
+
     themeToggleBtns.forEach(btn => {
         updateThemeButtonText(btn, savedTheme);
 
@@ -65,34 +77,36 @@ function initActiveNavHighlight() {
 }
 
 function initFaqAccordion() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    if (faqItems.length === 0) return;
-
-    faqItems.forEach(item => {
-        const header = item.querySelector('.faq-question');
+    document.addEventListener('click', (e) => {
+        const header = e.target.closest('.faq-question');
         if (!header) return;
 
-        header.addEventListener('click', () => {
-            const isOpen = item.classList.contains('open');
+        const item = header.closest('.faq-item');
+        if (!item) return;
 
-            faqItems.forEach(otherItem => {
+        const isOpen = item.classList.contains('open');
+        const parentContainer = item.parentElement;
+
+        if (parentContainer) {
+            const siblingItems = parentContainer.querySelectorAll('.faq-item');
+            siblingItems.forEach(otherItem => {
                 if (otherItem !== item) {
                     otherItem.classList.remove('open');
                     const answer = otherItem.querySelector('.faq-answer');
                     if (answer) answer.style.maxHeight = null;
                 }
             });
+        }
 
-            item.classList.toggle('open');
-            const answer = item.querySelector('.faq-answer');
-            if (answer) {
-                if (!isOpen) {
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                } else {
-                    answer.style.maxHeight = null;
-                }
+        item.classList.toggle('open');
+        const answer = item.querySelector('.faq-answer');
+        if (answer) {
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = null;
             }
-        });
+        }
     });
 }
 
@@ -179,11 +193,6 @@ function initContentSlider() {
     });
 }
 
-/* ==========================================================
-   Practical 5 — Registration form validation
-   Regex validation, live errors near each field, password
-   strength meter. Runs only when #register-form exists.
-   ========================================================== */
 function initRegisterValidation() {
     const registerForm = document.getElementById('register-form');
     if (!registerForm) return;
@@ -237,6 +246,7 @@ function initRegisterValidation() {
     const pwStrengthText = document.getElementById('pw-strength-text');
 
     function setFieldState(input, errorEl, isValid, message) {
+        if (!input) return;
         if (isValid) {
             input.classList.remove('input-invalid');
             input.setAttribute('aria-invalid', 'false');
@@ -250,6 +260,7 @@ function initRegisterValidation() {
 
     function validateField(key) {
         const field = fields[key];
+        if (!field.input) return true;
         const value = field.input.value.trim();
         const isValid = field.pattern.test(value);
         setFieldState(field.input, field.error, isValid, field.message);
@@ -257,6 +268,7 @@ function initRegisterValidation() {
     }
 
     function validateConfirmPassword() {
+        if (!confirmPasswordInput) return true;
         const isValid =
             confirmPasswordInput.value.length > 0 &&
             confirmPasswordInput.value === fields.password.input.value;
@@ -265,20 +277,23 @@ function initRegisterValidation() {
     }
 
     function validateSelect(select, errorEl, message) {
+        if (!select) return true;
         const isValid = select.value !== '';
         setFieldState(select, errorEl, isValid, message);
         return isValid;
     }
 
     function validateGender() {
+        if (genderInputs.length === 0) return true;
         const isValid = Array.from(genderInputs).some((r) => r.checked);
-        genderError.textContent = isValid ? '' : 'Please select a gender.';
+        if (genderError) genderError.textContent = isValid ? '' : 'Please select a gender.';
         return isValid;
     }
 
     function validateTerms() {
+        if (!termsInput) return true;
         const isValid = termsInput.checked;
-        termsError.textContent = isValid ? '' : 'You must accept the terms and conditions.';
+        if (termsError) termsError.textContent = isValid ? '' : 'You must accept the terms and conditions.';
         return isValid;
     }
 
@@ -293,6 +308,7 @@ function initRegisterValidation() {
     }
 
     function updateStrengthMeter() {
+        if (!fields.password.input || !pwStrengthBar || !pwStrengthText) return;
         const value = fields.password.input.value;
         const score = getPasswordStrength(value);
 
@@ -325,30 +341,33 @@ function initRegisterValidation() {
 
     Object.keys(fields).forEach((key) => {
         const field = fields[key];
+        if (!field.input) return;
         field.input.addEventListener('input', () => {
             validateField(key);
             if (key === 'password') {
                 updateStrengthMeter();
-                if (confirmPasswordInput.value) validateConfirmPassword();
+                if (confirmPasswordInput && confirmPasswordInput.value) validateConfirmPassword();
             }
         });
         field.input.addEventListener('blur', () => validateField(key));
     });
 
-    confirmPasswordInput.addEventListener('input', validateConfirmPassword);
-    confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+    if (confirmPasswordInput) {
+        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+        confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+    }
 
-    courseSelect.addEventListener('change', () =>
-        validateSelect(courseSelect, courseError, 'Please select a course.'));
-    yearSelect.addEventListener('change', () =>
-        validateSelect(yearSelect, yearError, 'Please select a year.'));
+    if (courseSelect) courseSelect.addEventListener('change', () => validateSelect(courseSelect, courseError, 'Please select a course.'));
+    if (yearSelect) yearSelect.addEventListener('change', () => validateSelect(yearSelect, yearError, 'Please select a year.'));
     genderInputs.forEach((radio) => radio.addEventListener('change', validateGender));
-    termsInput.addEventListener('change', validateTerms);
+    if (termsInput) termsInput.addEventListener('change', validateTerms);
 
     registerForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        formSuccess.textContent = '';
-        formSuccess.className = '';
+        if (formSuccess) {
+            formSuccess.textContent = '';
+            formSuccess.className = '';
+        }
 
         const results = Object.keys(fields).map(validateField);
         results.push(validateConfirmPassword());
@@ -360,13 +379,318 @@ function initRegisterValidation() {
         const allValid = results.every(Boolean);
 
         if (allValid) {
-            formSuccess.textContent = 'All fields look good — form is ready to submit to the server.';
-            formSuccess.classList.add('form-success-ok');
+            if (formSuccess) {
+                formSuccess.textContent = 'All fields look good — form is ready to submit to the server.';
+                formSuccess.classList.add('form-success-ok');
+            }
         } else {
-            formSuccess.textContent = 'Please fix the highlighted fields above.';
-            formSuccess.classList.add('form-success-error');
+            if (formSuccess) {
+                formSuccess.textContent = 'Please fix the highlighted fields above.';
+                formSuccess.classList.add('form-success-error');
+            }
             const firstInvalid = registerForm.querySelector('.input-invalid, input:invalid');
             if (firstInvalid) firstInvalid.focus();
         }
     });
+}
+
+async function initFaqsPage() {
+    const container = document.getElementById('faq-container') || document.getElementById('faqs-container');
+    const statusEl = document.getElementById('faq-status') || document.getElementById('faqs-status');
+
+    if (!container) return;
+
+    try {
+        if (statusEl) {
+            statusEl.textContent = 'Loading FAQs...';
+            statusEl.style.display = 'block';
+        }
+
+        const response = await fetch('data/faqs.json');
+        if (!response.ok) throw new Error(`HTTP error status: ${response.status}`);
+        
+        const faqs = await response.json();
+
+        if (statusEl) statusEl.style.display = 'none';
+
+        if (!faqs || faqs.length === 0) {
+            container.innerHTML = '<p class="fetch-status">No FAQs available right now.</p>';
+            return;
+        }
+
+        container.innerHTML = faqs.map(faq => `
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <span>${escapeHTML(faq.question)}</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>${escapeHTML(faq.answer)}</p>
+                </div>
+            </div>
+        `).join('');
+
+    } catch (error) {
+        console.error('Error fetching FAQs:', error);
+        if (statusEl) {
+            statusEl.textContent = 'Failed to load FAQs.';
+            statusEl.className = 'fetch-status fetch-error';
+        }
+    }
+}
+
+function initEventsPage() {
+    let allEvents = [];
+    let currentPage = 1;
+    const itemsPerPage = 4;
+
+    const searchInput = document.getElementById('event-search');
+    const categorySelect = document.getElementById('event-category');
+    const sortSelect = document.getElementById('event-sort');
+    const statusEl = document.getElementById('events-status');
+    const container = document.getElementById('events-container');
+    const paginationEl = document.getElementById('events-pagination');
+    const form = document.getElementById('events-controls');
+
+    async function loadEvents() {
+        try {
+            if (statusEl) {
+                statusEl.textContent = 'Loading campus events...';
+                statusEl.className = 'fetch-status';
+                statusEl.style.display = 'block';
+            }
+
+            const response = await fetch('data/events.json');
+            if (!response.ok) throw new Error(`HTTP error status: ${response.status}`);
+            allEvents = await response.json();
+
+            if (statusEl) statusEl.style.display = 'none';
+            render();
+        } catch (error) {
+            console.error('Error fetching events:', error);
+            if (statusEl) {
+                statusEl.textContent = 'Failed to load events. Please verify network or JSON location.';
+                statusEl.className = 'fetch-status fetch-error';
+            }
+        }
+    }
+
+    function processEvents() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const category = categorySelect ? categorySelect.value : '';
+        const sort = sortSelect ? sortSelect.value : '';
+
+        let filtered = allEvents.filter(event => {
+            const matchesSearch = !query || 
+                event.title.toLowerCase().includes(query) || 
+                event.description.toLowerCase().includes(query);
+            const matchesCategory = !category || event.category === category;
+            return matchesSearch && matchesCategory;
+        });
+
+        filtered.sort((a, b) => {
+            if (sort === 'date-asc') return new Date(a.date) - new Date(b.date);
+            if (sort === 'date-desc') return new Date(b.date) - new Date(a.date);
+            if (sort === 'title-asc') return a.title.localeCompare(b.title);
+            if (sort === 'title-desc') return b.title.localeCompare(a.title);
+            return 0;
+        });
+
+        return filtered;
+    }
+
+    function render() {
+        if (!container) return;
+
+        const processed = processEvents();
+        const totalPages = Math.ceil(processed.length / itemsPerPage) || 1;
+
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const pageItems = processed.slice(startIndex, startIndex + itemsPerPage);
+
+        if (pageItems.length === 0) {
+            container.innerHTML = '<p class="fetch-status">No events match your search criteria.</p>';
+        } else {
+            container.innerHTML = pageItems.map(item => `
+                <article class="data-card">
+                    <span class="badge badge-${escapeHTML(item.category)}">${escapeHTML(item.category)}</span>
+                    <h3>${escapeHTML(item.title)}</h3>
+                    <p>${escapeHTML(item.description)}</p>
+                    <time datetime="${escapeHTML(item.date)}">🗓️ ${formatDate(item.date)}</time>
+                </article>
+            `).join('');
+        }
+
+        renderPagination(paginationEl, totalPages, currentPage, (newPage) => {
+            currentPage = newPage;
+            render();
+        });
+    }
+
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            currentPage = 1;
+            render();
+        });
+    }
+
+    if (searchInput) searchInput.addEventListener('input', () => { currentPage = 1; render(); });
+    if (categorySelect) categorySelect.addEventListener('change', () => { currentPage = 1; render(); });
+    if (sortSelect) sortSelect.addEventListener('change', () => { currentPage = 1; render(); });
+
+    loadEvents();
+}
+
+function initResourcesPage() {
+    let allResources = [];
+    let currentPage = 1;
+    const itemsPerPage = 6;
+
+    const searchInput = document.getElementById('resource-search');
+    const subjectSelect = document.getElementById('subject-filter');
+    const sortSelect = document.getElementById('resource-sort');
+    const statusEl = document.getElementById('resources-status');
+    const container = document.getElementById('resources-container');
+    const paginationEl = document.getElementById('resources-pagination');
+    const form = document.getElementById('resources-controls');
+
+    async function loadResources() {
+        try {
+            if (statusEl) {
+                statusEl.textContent = 'Loading learning resources...';
+                statusEl.className = 'fetch-status';
+                statusEl.style.display = 'block';
+            }
+
+            const response = await fetch('data/resources.json');
+            if (!response.ok) throw new Error(`HTTP error status: ${response.status}`);
+            allResources = await response.json();
+
+            if (statusEl) statusEl.style.display = 'none';
+            render();
+        } catch (error) {
+            console.error('Error fetching resources:', error);
+            if (statusEl) {
+                statusEl.textContent = 'Failed to load study resources.';
+                statusEl.className = 'fetch-status fetch-error';
+            }
+        }
+    }
+
+    function processResources() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const subject = subjectSelect ? subjectSelect.value.toLowerCase() : '';
+        const sort = sortSelect ? sortSelect.value : '';
+
+        let filtered = allResources.filter(res => {
+            const matchesSearch = !query || 
+                res.name.toLowerCase().includes(query) || 
+                res.subjectName.toLowerCase().includes(query);
+            const matchesSubject = !subject || res.subjectCode.toLowerCase() === subject;
+            return matchesSearch && matchesSubject;
+        });
+
+        filtered.sort((a, b) => {
+            if (sort === 'name-asc') return a.name.localeCompare(b.name);
+            if (sort === 'name-desc') return b.name.localeCompare(a.name);
+            if (sort === 'subject-asc') return a.subjectName.localeCompare(b.subjectName);
+            if (sort === 'subject-desc') return b.subjectName.localeCompare(a.subjectName);
+            return 0;
+        });
+
+        return filtered;
+    }
+
+    function render() {
+        if (!container) return;
+
+        const processed = processResources();
+        const totalPages = Math.ceil(processed.length / itemsPerPage) || 1;
+
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const pageItems = processed.slice(startIndex, startIndex + itemsPerPage);
+
+        if (pageItems.length === 0) {
+            container.innerHTML = '<p class="fetch-status">No resources found matching your query.</p>';
+        } else {
+            container.innerHTML = pageItems.map(item => `
+                <div class="data-card">
+                    <span class="badge badge-technical">${escapeHTML(item.subjectCode.toUpperCase())}</span>
+                    <h3>${escapeHTML(item.name)}</h3>
+                    <p><strong>Subject:</strong> ${escapeHTML(item.subjectName)}</p>
+                    <a href="${escapeHTML(item.url)}" class="btn btn-primary" style="margin-top:0.5rem; display:inline-block;" download>Download File</a>
+                </div>
+            `).join('');
+        }
+
+        renderPagination(paginationEl, totalPages, currentPage, (newPage) => {
+            currentPage = newPage;
+            render();
+        });
+    }
+
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            currentPage = 1;
+            render();
+        });
+    }
+
+    if (searchInput) searchInput.addEventListener('input', () => { currentPage = 1; render(); });
+    if (subjectSelect) subjectSelect.addEventListener('change', () => { currentPage = 1; render(); });
+    if (sortSelect) sortSelect.addEventListener('change', () => { currentPage = 1; render(); });
+
+    loadResources();
+}
+
+function renderPagination(container, totalPages, currentPage, onPageChange) {
+    if (!container) return;
+    if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+    }
+
+    let buttonsHTML = `<button class="pagination-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">Previous</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+        buttonsHTML += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+
+    buttonsHTML += `<button class="pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">Next</button>`;
+
+    container.innerHTML = buttonsHTML;
+
+    container.querySelectorAll('.pagination-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetPage = parseInt(btn.getAttribute('data-page'), 10);
+            if (targetPage >= 1 && targetPage <= totalPages) {
+                onPageChange(targetPage);
+            }
+        });
+    });
+}
+
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/[&<>'"]/g, 
+        tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag] || tag)
+    );
 }

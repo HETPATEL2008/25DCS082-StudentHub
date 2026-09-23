@@ -1,63 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudentHub — Events</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub — Events</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-  <a href="index.html" class="header-brand">
-    <div class="logo">SH</div>
-    <span class="logo-text">StudentHub</span>
-  </a>
+    <header>
+        <a href="index.html" class="header-brand">
+            <div class="logo">SH</div>
+            <span class="logo-text">StudentHub</span>
+        </a>
 
-  <button class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+        <button class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li>
-        <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle dark mode">
-          🌙 <span class="theme-text">Dark</span>
-        </button>
-      </li>
-    </ul>
-  </nav>
-  </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle-btn" type="button"
+                            aria-label="Toggle dark mode">
+                        🌙 <span class="theme-text">Dark</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <h1>Upcoming Events</h1>
+    <main>
 
-    <section aria-labelledby="events-list-heading">
-      <h2 id="events-list-heading" class="visually-hidden">Event list</h2>
+        <h1>Upcoming Events</h1>
 
-      <article>
-        <h3>Event title</h3>
-        <p><time datetime="2026-08-01">1 August 2026</time></p>
-        <p>Short description of the event.</p>
-      </article>
+        <!-- Practical 6: Search, Filter and Sort -->
+        <section class="data-controls-section"
+                 aria-labelledby="events-controls-heading">
 
-      <article>
-        <h3>Event title</h3>
-        <p><time datetime="2026-08-15">15 August 2026</time></p>
-        <p>Short description of the event.</p>
-      </article>
-    </section>
-  </main>
+            <h2 id="events-controls-heading" class="visually-hidden">
+                Event search and filter controls
+            </h2>
 
-  <footer>
-    <p>&copy; 2026 StudentHub. All rights reserved.</p>
-  </footer>
+            <form id="events-controls" class="data-controls">
 
-  <script src="js/main.js"></script>
+                <div>
+                    <label for="event-search">Search events</label>
+                    <input
+                        type="search"
+                        id="event-search"
+                        placeholder="Search by event name or description"
+                    >
+                </div>
+
+                <div>
+                    <label for="event-category">Filter by category</label>
+                    <select id="event-category">
+                        <option value="">All categories</option>
+                        <option value="technical">Technical</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="sports">Sports</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="seminar">Seminar</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="event-sort">Sort events</label>
+                    <select id="event-sort">
+                        <option value="date-asc">Date: Oldest First</option>
+                        <option value="date-desc">Date: Newest First</option>
+                        <option value="title-asc">Title: A-Z</option>
+                        <option value="title-desc">Title: Z-A</option>
+                    </select>
+                </div>
+
+                <button type="submit">Apply</button>
+
+            </form>
+
+        </section>
+
+        <p id="events-status" class="fetch-status">Loading events...</p>
+
+        <section aria-labelledby="events-list-heading">
+
+            <h2 id="events-list-heading" class="visually-hidden">
+                Event list
+            </h2>
+
+            <div id="events-container" class="event-list"></div>
+
+            <div id="events-pagination" class="pagination"
+                 aria-label="Events pagination"></div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 StudentHub. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

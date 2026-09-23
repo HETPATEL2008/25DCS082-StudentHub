@@ -9,101 +9,118 @@
 <body>
 
     <header>
-  <a href="index.html" class="header-brand">
-    <div class="logo">SH</div>
-    <span class="logo-text">StudentHub</span>
-  </a>
+        <a href="index.html" class="header-brand">
+            <div class="logo">SH</div>
+            <span class="logo-text">StudentHub</span>
+        </a>
 
-  <button class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+        <button class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li>
-        <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle dark mode">
-          🌙 <span class="theme-text">Dark</span>
-        </button>
-      </li>
-    </ul>
-  </nav>
-</header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle-btn" type="button"
+                            aria-label="Toggle dark mode">
+                        🌙 <span class="theme-text">Dark</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <main class="container">
+
         <section class="hero-card">
             <h1>Welcome to StudentHub</h1>
             <p>Student Portal for courses, events, and academic resources.</p>
-            <button class="btn btn-primary" data-modal-target="#announcement-modal">Get Started</button>
+            <button class="btn btn-primary" data-modal-target="#announcement-modal">
+                Get Started
+            </button>
         </section>
 
         <section class="slider-wrapper">
             <div class="slider-container">
+
                 <div class="slide active">
                     <h3>Explore Courses</h3>
                     <p>Browse through all available academic offerings across departments.</p>
                 </div>
+
                 <div class="slide">
                     <h3>Stay Updated on Events</h3>
                     <p>Participate in campus workshops, seminars, and tech competitions.</p>
                 </div>
+
                 <div class="slide">
                     <h3>Academic Resources</h3>
                     <p>Download previous semester study materials and lecture notes.</p>
                 </div>
+
                 <div class="slider-controls">
                     <button class="slider-btn prev" aria-label="Previous Slide">❮</button>
                     <button class="slider-btn next" aria-label="Next Slide">❯</button>
                 </div>
+
             </div>
         </section>
 
         <section class="section">
             <h2>What you can find here</h2>
+
             <div class="grid-3">
+
                 <div class="card">
                     <h3>Courses</h3>
                     <p>Browse all courses offered.</p>
                 </div>
+
                 <div class="card">
                     <h3>Events</h3>
                     <p>Stay updated on incoming events.</p>
                 </div>
+
                 <div class="card">
                     <h3>Resources</h3>
                     <p>Download study materials.</p>
                 </div>
+
             </div>
         </section>
 
+        <!-- Practical 6: Dynamic FAQ -->
         <section class="section">
             <h2>Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">What is StudentHub? <span>+</span></button>
-                    <div class="faq-answer"><p>StudentHub is a central web portal built for managing student resources, academic events, and course details.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">How do I access course resources? <span>+</span></button>
-                    <div class="faq-answer"><p>Navigate to the Resources tab from the navigation header to download available study materials.</p></div>
-                </div>
+
+            <div id="faq-container" class="faq-container">
+                <p class="fetch-status">Loading FAQs...</p>
             </div>
         </section>
 
         <div id="announcement-modal" class="modal">
+
             <div class="modal-header">
                 <h3>Get Started with StudentHub</h3>
                 <button data-modal-close class="close-modal-btn">&times;</button>
             </div>
+
             <div class="modal-body">
-                <p>Welcome! Explore courses, view upcoming events, and access study resources right from your dashboard.</p>
+                <p>
+                    Welcome! Explore courses, view upcoming events, and access
+                    study resources right from your dashboard.
+                </p>
             </div>
+
         </div>
+
         <div id="modal-overlay"></div>
+
     </main>
 
     <footer class="footer">
